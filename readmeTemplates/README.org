@@ -1,0 +1,65 @@
+#+TITLE: Project Title
+*One-line summary of project.*
+
+/[[http://www.patorjk.com/software/taag][Or just put some ascii art here]]/
+
+* Description
+Paragraph. /(Omit heading and paragraph if one-line summary above is enough.)/
+
+/Repo URL: [[exampleURL][URL]]/
+
+* Features
+The main features include:
+
+- TBD
+
+* Prerequisites / Dependencies
+
+- As needed
+
+* Installation and Setup
+
+- Clone the repo into a working folder.
+- Any other preparatory steps
+
+* Execution
+
+- How to run the program
+- Step-by-step bullets
+
+#+begin_example
+code blocks for commands
+#+end_example
+
+* Post-Execution
+
+- As needed
+
+* Additional Notes
+
+- TBD
+
+* Todo
+
+- TBD
+
+* Metadata
+
+*Contributors*
+
+- Mike Owens | [[https://gitlab.com/mikeo85][GitLab]] ~ [[https://github.com/mikeo85][GitHub]] ~ [[https://twitter.com/quietmike8192][Twitter]]
+
+*License: [[file:LICENSE][{TYPE: MIT, GPL, etc.}]]* * * * * /Note: [[https://www.toptal.com/open-source/developers-guide-to-open-source-licenses][Here's a quick summary of various open source licenses]]./
+
+*Version History*
+
+- See [[../../commits][commits]] or [[../../releases][release history]].
+
+* Acknowledgments
+
+/Inspiration, code snippets, etc./
+
+- [[https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc][DomPizzie/README-Template.md]]
+- [[https://github.com/dbader/readme-template][dbader/readme-template]]
+- [[http://www.patorjk.com/software/taag][ASCII art]]
+- [[file:URL][TBD]]
