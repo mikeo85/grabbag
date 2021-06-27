@@ -1,7 +1,7 @@
 #!/bin/bash
 ############################################################
 #
-#  GIT REMOVE SUBMODULE
+#  REMOVE GIT SUBMODULE
 #  ---------------------------------------------------------
 #  Simplify the removal of git submodules.
 #
@@ -20,7 +20,7 @@
 #  1) Copy the script into the repo root.
 #  2) The only input is the name of the submodule to remove.
 #  3) Run the script.
-#       $ ./gitRemoveSubmodule.sh <submodule full name>
+#       $ ./removeGitSubmodule.sh <submodule full name>
 #
 #  References:
 #  -----------
@@ -39,12 +39,13 @@ MODULE_NAME=$1
 
 git config -f .gitmodules --remove-section submodule.$MODULE_NAME
 git config -f .git/config --remove-section submodule.$MODULE_NAME
-
+git add .gitmodules
 git rm --cached $MODULE_NAME
 rm -rf .git/modules/$MODULE_NAME
 rm -rf $MODULE_NAME
-git add .gitmodules
-git add $MODULE_NAME
-git add .git/modules/$MODULE_NAME
+git commit -m "removing submodule $MODULE_NAME" || echo "* * * * *
+Unable to commit changes. See output above to identify and correct any issues.
+Note: If you never committed the submodule addition, then that's the most likely reason that this commit attempt failed. Most likely, no further action is necessary in this case.
+* * * * *"
 # \\------ End Script ------//
 echo $(basename "$0")" complete."
