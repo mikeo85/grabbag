@@ -1,0 +1,51 @@
+#+TITLE: Grab Bag
+#+BEGIN_EXAMPLE
+                              /|                  /|                            
+    .--./)                    ||                  ||                   .--./)   
+   /.''\\   .-,.--.           ||                  ||                  /.''\\    
+  | |  | |  |  .-. |    __    ||  __              ||  __        __   | |  | |   
+   \`-' /   | |  | | .:--.'.  ||/'__ '.           ||/'__ '.  .:--.'.  \`-' /    
+   /("'`    | |  | |/ |   \ | |:/`  '. '          |:/`  '. '/ |   \ | /("'`     
+   \ '---.  | |  '- `" __ | | ||     | |          ||     | |`" __ | | \ '---.   
+    /'""'.\ | |      .'.''| | ||\    / '          ||\    / ' .'.''| |  /'""'.\  
+   ||     ||| |     / /   | |_|/\'..' /           |/\'..' / / /   | |_||     || 
+   \'. __// |_|     \ \._,\ '/'  `'-'`            '  `'-'`  \ \._,\ '/\'. __//  
+    `'---'           `--'  `"                                `--'  `"  `'---'   
+#+END_EXAMPLE
+
+* Description
+*Collection of miscellaneous scripts, script templates, readme templates, and other one-off tools*
+
+/Repo URL: [[https://gitlab.com/mikeo85/grabbag.git]]/
+
+* Features
+- [[./templates/][Templates]] for Readme files (markdown and org) and script headers.
+- [[./scripts/][Scripts]] and script fragments created for various purposes.
+- [[./borrowed/][Borrowed]] stuff, created by others, that seems useful. Full credit to the creators.
+  - 
+
+* Installation and Setup
+- Clone the repo including submodules.
+  #+begin_src sh
+  #https
+  git clone --recurse-submodules https://gitlab.com/mikeo85/grabbag.git
+  #ssh
+  git clone --recurse-submodules git@gitlab.com:mikeo85/grabbag.git
+  #+end_src
+- Fire away.
+- When pulling changes, remember to recurse submodules as well.
+  #+begin_src sh
+  git pull --recurse-submodules
+  #+end_src
+
+* Metadata
+
+*Contributors*
+
+- Mike Owens | [[https://gitlab.com/mikeo85][GitLab]] ~ [[https://github.com/mikeo85][GitHub]] ~ [[https://twitter.com/quietmike8192][Twitter]]
+
+*License: [[file:LICENSE][MIT]]* * * * * /Note: Resources in the [[./borrowed/][borrowed]] directory are credited to their creators and may have different licenses./
+
+* Acknowledgments
+- [[http://www.patorjk.com/software/taag][ASCII art]]
+- All sources referenced under 'Borrowed' in the /[[Features]]/ section
