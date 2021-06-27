@@ -1,0 +1,3 @@
+[submodule "getlsioapp"]
+	path = getlsioapp
+	url = https://github.com/technorabilia/scripts.git
