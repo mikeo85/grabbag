@@ -22,11 +22,6 @@
 - [[./templates/][Templates]] for Readme files (markdown and org) and script headers.
 - [[./scripts/][Scripts]] and script fragments created for various purposes.
 - [[./borrowed/][Borrowed]] stuff, created by others, that seems useful. Full credit to the creators.
-  - *[[./borrowed/getlsioapp/][getlsioapp]]* ([[https://github.com/technorabilia/scripts.git][Source]]): Get LinuxServer.io application docker-compose configuration.
-    - See also: [[https://www.technorabilia.com/10-seconds-linuxserver-io-application-installer/][10 seconds LinuxServer.io application installer]]
-      #+begin_quote
-      The script getlsioapp.sh allows you to install a LinuxServer.io application in less than 10 seconds. It will automatically create the necessary volume directories on the host and automatically create the correct docker-compose configuration file. The docker-compose configuration file includes a description of all environment variables, volume- and port mappings.
-      #+end_quote
 
 * Installation and Setup
 - Clone the repo including submodules.
