@@ -12,15 +12,16 @@
 #        GitHub:     https://github.com/mikeo85
 #        Twitter:    https://twitter.com/quietmike8192
 #
-#  Instead of remembering all of the commands,
-#  just run this script.
+#  Instead of remembering all of the commands, just run this script!
 #
 #  Instructions:
 #  -------------
-#  1) Copy the script into the repo root.
-#  2) The only input is the name of the submodule to remove.
-#  3) Run the script.
-#       $ ./removeGitSubmodule.sh <submodule full name>
+#  1) The only input is the name of the submodule to remove.
+#  2) Run the script by referencing the full or relative path.
+#       $ path/to/removeGitSubmodule.sh <submodule full name>
+#  3) If planning to use the script regularly, consider
+#     symlinking it into your PATH somewhere. For example:
+#       $ ln -s path/to/removeGitSubmodule.sh /usr/local/bin/
 #
 #  References:
 #  -----------
