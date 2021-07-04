@@ -37,13 +37,22 @@ if [ $# -ne 1 ]; then
 fi
 
 MODULE_NAME=$1
-
+echo "Removing submodule $MODULE_NAME"
+echo "... Removing from .gitmodules ..."
 git config -f .gitmodules --remove-section submodule.$MODULE_NAME
+echo "Success"
+echo "... Removing from .git/config ..."
 git config -f .git/config --remove-section submodule.$MODULE_NAME
-git add .gitmodules
-git rm --cached $MODULE_NAME
-rm -rf .git/modules/$MODULE_NAME
-rm -rf $MODULE_NAME
+echo "Success"
+echo "... Adding .gitmodules change to git tracking ..."
+git add .gitmodules && echo "Success"
+echo "... Removing cached files from git tracking ..."
+git rm --cached $MODULE_NAME && echo "Success"
+echo "... Removing files from .git/modules/$MODULE_NAME ..."
+rm -rf .git/modules/$MODULE_NAME && echo "Success"
+echo "... Removing files from working tree at $MODULE_NAME ..."
+rm -rf $MODULE_NAME && echo "Success"
+echo "... Committing changes ..."
 git commit -m "removing submodule $MODULE_NAME" || echo "* * * * *
 Unable to commit changes. See output above to identify and correct any issues.
 Note: If you never committed the submodule addition, then that's the most likely reason that this commit attempt failed. Most likely, no further action is necessary in this case.
