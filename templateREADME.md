@@ -50,7 +50,12 @@ code blocks for commands
 
 * Mike Owens | [GitLab](https://gitlab.com/mikeo85) ~ [GitHub](https://github.com/mikeo85) ~ [Twitter](https://twitter.com/quietmike8192)
 
-**License: [{TYPE: MIT, GPL, etc.}](LICENSE)** * * * * *Note: [Here's a quick summary of various open source licenses](https://www.toptal.com/open-source/developers-guide-to-open-source-licenses).*
+**License: [{TYPE: MIT, GPL, etc.}](LICENSE)**
+
+* *Info about open source licenses:*
+  * *[ChooseALicense.com](https://choosealicense.com)*
+  * *[Open Source Initiative](https://opensource.org/licenses)*
+  * *[Developer's Guide to Open Source Licenses](https://www.toptal.com/open-source/developers-guide-to-open-source-licenses)*
 
 **Version History**
 
