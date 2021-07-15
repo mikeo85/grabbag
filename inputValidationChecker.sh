@@ -1,49 +1,58 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# # initialize checkinputs variable as blank
-# checkinputs=''
+############################################################
+#
+#  INPUT VALIDATION CHECKER
+#  ---------------------------------------------------------
+#  Snippet to validate user inputs for a bash script
+#
+#        Written by: Mike Owens
+#        Email:      mikeowens (at) fastmail (dot) com
+#        Website:    https://michaelowens.me
+#        GitLab:     https://gitlab.com/mikeo85
+#        GitHub:     https://github.com/mikeo85
+#        Twitter:    https://twitter.com/quietmike8192
+#
+#  This snippet contains different methods for validating
+#  user input to a bash script, including verifying the
+#  correct number of arguments were provided, checking for
+#  numerical values, and/or verifying the provided argument
+#  is in a list of expected inputs.
+#
+############################################################
 
-# # define valid inputs for input field 1
-# inputList1=(
-#     "a"
-#     "b"
-#     "c"
-# )
+echo "Running $(basename "$0")..."
+# //----- Begin Script -----\\
+## INPUT VALIDATION FUNCTIONS
+## ========================================
+exitHelp() { echo >&2 "$@";printf "%s" "$helpText";exit 1; }
+countInputs() { [ "$#" -eq "$requiredNumOfInputs" ] || exitHelp "$requiredNumOfInputs argument(s) required, $# provided"; }
+isNum() { echo "$1" | grep -E -q '^[0-9]+$' || exitHelp "Numeric argument required, \"$1\" provided"; }
+inList() { local ckInput="$1"; shift; local arr=("$@"); printf '%s\n' "${arr[@]}" | grep -P -q "^$ckInput\$" || exitHelp "\"$ckInput\" is not a valid argument."; }
 
-# # function to check input value against valid list
-# # to use: contains <inputItem> <validList>
-# # contains() {
-# function inList {
-#     local ckInput="^$1\$"
-#     shift
-#     local arr=("$@")
-#     if printf '%s\n' "${arr[@]}" | grep -P -q "$ckInput"; then
-#         output'yes'
-#     else
-#         output'no'
-#     fi
-# }
+## INPUT VALIDATION PROCESS
+## ========================================
+## ++++ TO BE MODIFIED BY SCRIPT AUTHOR ++++
 
-# if [[ $# -eq 1 ]];then # correct number of inputs?
-#     # Validate inputs match correct options
-#     # (Copy & modify this section for each additional input field)
-#     test=${inList "$1" "${inputList1[@]}"}
-#     if [[ "$test" == 'yes' ]];then
-#         checkinputs+='pass';
-#     fi
-# fi
-
-# echo $checkinputs
-
-
-
-requiredNumOfInputs
-
-
-helpText="
-A
-b
-c
+### Define the HELP TEXT with USAGE INSTRUCTIONS
+### ----------------------------------------
+helpText="Usage: $(basename "$0") validates user inputs against expected values.
+       $ $0 <input1> <input2>
 "
-# echo "$helpText"
+### Define INPUT Requirements
+### ----------------------------------------
+#### Indicate the required number of inputs
+requiredNumOfInputs=2
+##### List the valid inputs for each field.
+##### Repeat for each field as needed. Remove if not required.
+validInputs1=( 1 2 3 )
+validInputs2=( "a" "b" "c" )
+
+### Validate The Inputs
+### ----------------------------------------
+countInputs "$@" # Were the expected number of inputs provided?
+inList "$1" "${validInputs1[@]}" # check input 1
+inList "$2" "${validInputs2[@]}" # check input 2
+
+# \\------ End Script ------//
