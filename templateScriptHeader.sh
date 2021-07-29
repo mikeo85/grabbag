@@ -17,25 +17,24 @@ set -euo pipefail
 #  
 ############################################################
 
-# //----- Begin Input Validation -----\\
+# //========== BEGIN INPUT VALIDATION ==========\\
 
-## INPUT VALIDATION FUNCTIONS
-## ========================================
+## Input Validation Functions
+## ----------------------------------------
 exitHelp() { echo >&2 "$@";printf "%s" "$helpText";exit 1; }
 countInputs() { [ "$#" -eq "$requiredNumOfInputs" ] || exitHelp "$requiredNumOfInputs argument(s) required, $# provided"; }
 isNum() { echo "$1" | grep -E -q '^[0-9]+$' || exitHelp "Numeric argument required, \"$1\" provided"; }
 inList() { local ckInput="$1"; shift; local arr=("$@"); printf '%s\n' "${arr[@]}" | grep -P -q "^$ckInput\$" || exitHelp "\"$ckInput\" is not a valid argument."; }
 
-## INPUT VALIDATION PROCESS
-## ========================================
+## Input Validation Process
+## ----------------------------------------
 ## ++++ TO BE MODIFIED BY SCRIPT AUTHOR ++++
 
-### Define the HELP TEXT with USAGE INSTRUCTIONS
-### ----------------------------------------
+### Define the Help Text With Usage Instructions
 helpText="Usage: $(basename "$0") validates user inputs against expected values.
        $ $0 <input1> <input2>
 "
-### Define INPUT Requirements
+### Define Input Requirements
 ### ----------------------------------------
 #### Indicate the required number of inputs
 requiredNumOfInputs=2
@@ -50,10 +49,13 @@ countInputs "$@" # Were the expected number of inputs provided?
 inList "$1" "${validInputs1[@]}" # check input 1
 inList "$2" "${validInputs2[@]}" # check input 2
 
-# \\------ End Input Validation ------//
+# \\=========== END INPUT VALIDATION ===========//
+
+# //============================================\\
+# \\============================================//
 
 echo "Running $(basename "$0")..."
-# //----- Begin Script -----\\
+# //============ BEGIN SCRIPT BODY =============\\
 
-# \\------ End Script ------//
+# \\============= END SCRIPT BODY ==============//
 echo "$(basename "$0") complete."
