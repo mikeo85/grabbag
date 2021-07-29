@@ -9,6 +9,10 @@ Paragraph. *(Omit heading and paragraph if one-line summary above is enough.)*
 
 *Repo URL: [URL](URL)*
 
+* * * * *
+
+[[_TOC_]]
+
 ## Features
 
 The main features include:
@@ -52,9 +56,7 @@ code blocks for commands
 
 **License: [TBD](LICENSE)** | *For info about open source licenses: [ChooseALicense.com](https://choosealicense.com) / [Open Source Initiative](https://opensource.org/licenses) / [Developer's Guide to Open Source Licenses](https://www.toptal.com/open-source/developers-guide-to-open-source-licenses)*
 
-**Version History**
-
-* See [commits](../../commits) or [release history](../../releases).
+**Version History:** See [commits](../../commits) or [release history](../../releases).
 
 ## Acknowledgments
 
