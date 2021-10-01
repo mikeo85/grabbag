@@ -49,11 +49,10 @@ code blocks for commands
 
 - Mike Owens | [[https://gitlab.com/mikeo85][GitLab]] ~ [[https://github.com/mikeo85][GitHub]] ~ [[https://twitter.com/quietmike8192][Twitter]]
 
-*License: [[file:LICENSE][TBD]]* | /Info about open source licenses: [[https://choosealicense.com][ChooseALicense.com]] / [[https://opensource.org/licenses][Open Source Initiative]] / [[https://www.toptal.com/open-source/developers-guide-to-open-source-licenses][Developer's Guide to Open Source Licenses]]/
+*License: [[file:LICENSE][TBD]]* | /Info about open source licenses: [[https://choosealicense.com][ChooseALicense.com]] / [[https://opensource.org/licenses][Open Source Initiative]] / [[https://www.toptal.com/open-source/developers-guide-to-open-source-licenses][Developer's Guide]]/
 
-*Version History*
-
-- See [[../../commits][commits]] or [[../../releases][release history]].
+*Version History:* See [[../../commits][commits]]
+# or [[../../releases][release history]].
 
 * Acknowledgments
 
