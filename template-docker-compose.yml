@@ -1,0 +1,48 @@
+############################################################
+#  TITLE AND PURPOSE
+#  ---------------------------------------------------------
+#  Includes:
+#   - TBD
+############################################################
+version: "3"
+
+##### SERVICES #############################################
+services:
+
+  # ===== SERVICE 1 ========================================
+  #   DescriptionHere
+  myService:
+    container_name:
+    # build:
+    image:
+    # command:
+    # ports:
+    volumes:
+    # - /var/run/docker.sock:/var/run/docker.sock
+    # depends_on:
+    # networks:
+    restart: unless-stopped # "no" always on-failure unless-stopped
+    # entrypoint:
+    # expose:
+    # secrets:
+    # env_file:
+    # environment:
+    # labels:
+    # healthcheck:
+      # test: ["CMD", "curl", "-f", "http://localhost"]
+      # interval: 1m30s
+      # timeout: 10s
+      # retries: 3
+      # start_period: 40s
+    # logging:
+      # driver: # "json-file" (<-default) "syslog" "none"
+    security_opt:
+      - no-new-privileges:true
+    # user:
+    
+
+##### NETWORKS #############################################
+networks:
+
+##### VOLUMES ##############################################
+# volumes:
