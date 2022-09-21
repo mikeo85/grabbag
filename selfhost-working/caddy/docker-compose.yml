@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  caddy:
+    # image: caddy:<version>
+    build:
+      context: .
+      dockerfile: ./apps/caddy/build/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./apps/caddy/config/Caddyfile:/etc/caddy/Caddyfile
+      - ./site:/srv
+      - ./caddy_data:/data
+      - ./caddy_config:/config
+
+# volumes:
+#   caddy_data:
+#     external: true
+#   caddy_config:

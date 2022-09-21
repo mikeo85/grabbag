@@ -1,0 +1,14 @@
+http:
+  routers:
+    router0:
+      entryPoints:
+        - web
+      service: service-foo
+      rule: Path('/foo')
+
+  services:
+    service-foo:
+      loadBalancer:
+        servers:
+        - url: http://localhost:8080/
+        passHostHeader: false
