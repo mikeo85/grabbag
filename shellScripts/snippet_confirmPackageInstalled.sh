@@ -3,8 +3,8 @@
 
 confirmPackageInstalled() {
 	if [[ $(dpkg -l | grep -c $1) -gt 0 ]]; then
-		exit 0
+		return 0
 	else
-		exit 1
+		return 1
 	fi
 }
