@@ -206,6 +206,7 @@ setMOTD () {
             apt install figlet
         fi
         (figlet -f future $(hostname) || figlet $(hostname)) > /etc/motd
+        sed -i -E 's/#?PrintMotd no/PrintMotd yes/' /etc/ssh/sshd_config
         echo ""
         echo "New MOTD:"
         echo ""
@@ -368,7 +369,8 @@ enableSSHOnly () {
             sed -i -E 's/#?PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
             sed -i -E 's/#?ChallengeResponseAuthentication yes/ChallengeResponseAuthentication no/' /etc/ssh/sshd_config
             sed -i -E 's/#?UsePAM yes/UsePAM no/' /etc/ssh/sshd_config
-            sed -i -E 's/#?UsePAM yes/UsePAM no/' /etc/ssh/sshd_config
+            echo "Disabling root login..."
+            sed -i -E 's/#?PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
             echo "Restarting sshd"
             systemctl restart sshd
         fi
