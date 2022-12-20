@@ -26,11 +26,11 @@ MAIN="$NOW,$NEXT,$LATER,@Waiting"
 
 # FILTER: MAIN-Personal
 # Description: Same as main, but exclude work-related tasks from each section
-MAINPersonal="($NOW) & !##Work,(#NEXT) & !##Work,($LATER) & !##Work,(@Waiting) & !##Work"
+MAINPersonal="($NOW) & !##Work,($NEXT) & !##Work,($LATER) & !##Work,(@Waiting) & !##Work"
 
 # FILTER: MAIN-WORK
 # Description: Same as main, but only include work-related tasks from each section
-MAINWork="($NOW) & ##Work,(#NEXT) & ##Work,($LATER) & ##Work,(@Waiting) & ##Work"
+MAINWork="($NOW) & ##Work,($NEXT) & ##Work,($LATER) & ##Work,(@Waiting) & ##Work"
 
 # FILTER: Super Old
 # Description: Created more than 200 days ago, aren’t recurring, and don’t have a due date
