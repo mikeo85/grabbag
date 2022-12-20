@@ -12,6 +12,7 @@ set -euo pipefail
 #        Website:    https://michaelowens.me
 #        GitLab:     https://gitlab.com/mikeo85
 #        GitHub:     https://github.com/mikeo85
+#        Mastodon:   https://infosec.exchange/@m0x4d
 #        Twitter:    https://twitter.com/quietmike8192
 #
 #  This snippet contains different methods for validating
