@@ -1,3 +1,4 @@
+#!/bin/bash
 ############################################################
 # Get the LAN / Network IP address of the host
 # and the network interface
