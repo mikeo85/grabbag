@@ -146,8 +146,8 @@ if [[ $dups_ct -gt 0 ]]; then
 else
     echo "Directory organizing complete. No duplicates were identified."
 fi
-# Find all empty directories in the photos directory and delete them
-find "$source_dir" -type d -empty -delete
+# Find all empty directories in the photos directory and delete them (but leave the photos directory itself still there)
+find "$source_dir"/* -type d -empty -delete
 
 # \\============= END SCRIPT BODY ==============//
 echo "$(basename "$0") complete."
