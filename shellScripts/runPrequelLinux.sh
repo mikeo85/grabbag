@@ -163,11 +163,11 @@ updateHostname () {
 installAptBasics() {
     if [ "$1" = "i" ]; then
         # Function Info
-        echo "Install basic apt security & update packages, including unattended-upgrades."
+        echo "Install basic apt security & update packages."
     elif [ "$1" = "x" ]; then
         # Execute Function
-        apt install apt-listbugs needrestart debsums unattended-upgrades -y
-        dpkg-reconfigure -plow unattended-upgrades
+        apt install git apt-listbugs needrestart debsums -y
+        # dpkg-reconfigure -plow unattended-upgrades
     else
         echo "Error: Invalid function input. No action performed."
     fi
