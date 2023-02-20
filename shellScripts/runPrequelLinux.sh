@@ -217,24 +217,23 @@ setMOTD () {
         fi
         myHostname=$(hostname)
         LENGTH=${#myHostname}
-        if [ $LENGTH > 16 ]; then
-	        LENGTH=${#myHostname}
+        if [[ $LENGTH > 16 ]]; then
+            LENGTH=${#myHostname}
             INNERPAD=2
             WIDTH=$((INNERPAD + LENGTH + INNERPAD))
             PAD=8
             CORNERS="#"
             TOP_BOTTOM=$(printf '%*s' "$WIDTH" | tr ' ' '=')
             SPACES=$(printf ' %*s' "$PAD" '')
-            OUTPUT="$SPACES$CORNERS$TOP_BOTTOM$CORNERS\n$SPACES#  $(echo "$myHostname" | tr '[:lower:]' '[:upper:]')  #\n$SPACES$CORNERS$TOP_BOTTOM$CORNERS"
+            OUTPUT="$SPACES$CORNERS$TOP_BOTTOM$CORNERS\n$SPACES#  $(echo "$myHostname" | tr '[:lower:]' '[:upper:]')  #\n$SPACES$CORNERS$TOP_BOT>
             echo -e "$OUTPUT" > /etc/motd
-        elif [ $LENGTH > 13 ]; then
+        elif [[ $LENGTH > 13 ]]; then
             figFont="small"
             (figlet -f $figFont $(hostname) || figlet $(hostname)) > /etc/motd
         else
             figFont="standard"
             (figlet -f $figFont $(hostname) || figlet $(hostname)) > /etc/motd
         fi
-
         sed -i -E 's/#?PrintMotd no/PrintMotd yes/' /etc/ssh/sshd_config
         echo ""
         echo "New MOTD:"
@@ -246,6 +245,7 @@ setMOTD () {
         echo "Error: Invalid function input. No action performed."
     fi
 }
+
 
 setWarningBanner() {
     # - https://www.tecmint.com/ssh-warning-banner-linux/
