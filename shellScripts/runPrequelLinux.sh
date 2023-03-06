@@ -141,7 +141,7 @@ updateHostname () {
     elif [ "$1" = "x" ]; then
         # Execute Function
         read -p "New Hostname: " newHostname
-        newHostname=${newHostname//[^[:alnum:]]/}
+        newHostname=${newHostname//[^[:alnum:-_]]/}
         printf "New hostname will be '%s'. Please confirm.\n" "$newHostname"
         promptContinue carryOn
         if [ "$carryOn" == "Y" ]; then
@@ -150,7 +150,7 @@ updateHostname () {
                 printf "Hostname has been changed to %s.\n" "$newHostname"
             else
                 printf "An error occurred.\n"
-                promptUserConfirmation
+                updateHostname
             fi
         else
             printf "Hostname has NOT been changed.\n"
@@ -163,11 +163,11 @@ updateHostname () {
 installAptBasics() {
     if [ "$1" = "i" ]; then
         # Function Info
-        echo "Install basic apt security & update packages, including unattended-upgrades."
+        echo "Install basic apt security & update packages."
     elif [ "$1" = "x" ]; then
         # Execute Function
-        apt install apt-listbugs needrestart debsums unattended-upgrades -y
-        dpkg-reconfigure -plow unattended-upgrades
+        apt install git apt-listbugs needrestart debsums curl -y
+        # dpkg-reconfigure -plow unattended-upgrades
     else
         echo "Error: Invalid function input. No action performed."
     fi
@@ -176,7 +176,7 @@ installAptBasics() {
 createAdminUser () {
     if [ "$1" = "i" ]; then
         # Function Info
-        echo "Create an admin user other than root."
+        echo "Create an admin user other than root and/or configure existing user with necessary access."
     elif [ "$1" = "x" ]; then
         # Execute Function
         read -p "Username for new admin user: " newUsername
@@ -185,9 +185,18 @@ createAdminUser () {
         promptContinue carryOn
         if [ "$carryOn" == "Y" ]; then
             # Create the user
-            adduser "$newUsername" 
+            if id "$newUsername" &>/dev/null; then
+                echo "User account $newUsername exists"
+            else
+                echo "Creating user $newUsername"
+                adduser "$newUsername" 
+            fi
             # Give root privileges
-            usermod -aG sudo "$newUsername"
+            usermod -aG sudo "$newUsername"  && echo "$newUsername added to sudoers"
+            # Create SSH key
+            echo "Creating SSH Key (ed25519)"
+            myHostname=$(hostname)
+            ssh-keygen -a 1000 -o -t ed25519 -C "$newUsername @ $myHostname -- Generated $(date -u +'%F %T UTC')" -f "/home/$newUsername/.ssh/id_ed25519" -q
         else
             printf "User has NOT been added.\n"
         fi
@@ -206,7 +215,25 @@ setMOTD () {
         if [ $(dpkg -l | grep -c figlet) -eq 0 ]; then
             apt install figlet
         fi
-        (figlet -f future $(hostname) || figlet $(hostname)) > /etc/motd
+        myHostname=$(hostname)
+        LENGTH=${#myHostname}
+        if [[ $LENGTH > 16 ]]; then
+            LENGTH=${#myHostname}
+            INNERPAD=2
+            WIDTH=$((INNERPAD + LENGTH + INNERPAD))
+            PAD=8
+            CORNERS="#"
+            TOP_BOTTOM=$(printf '%*s' "$WIDTH" | tr ' ' '=')
+            SPACES=$(printf ' %*s' "$PAD" '')
+            OUTPUT="$SPACES$CORNERS$TOP_BOTTOM$CORNERS\n$SPACES#  $(echo "$myHostname" | tr '[:lower:]' '[:upper:]')  #\n$SPACES$CORNERS$TOP_BOT>
+            echo -e "$OUTPUT" > /etc/motd
+        elif [[ $LENGTH > 13 ]]; then
+            figFont="small"
+            (figlet -f $figFont $(hostname) || figlet $(hostname)) > /etc/motd
+        else
+            figFont="standard"
+            (figlet -f $figFont $(hostname) || figlet $(hostname)) > /etc/motd
+        fi
         sed -i -E 's/#?PrintMotd no/PrintMotd yes/' /etc/ssh/sshd_config
         echo ""
         echo "New MOTD:"
@@ -218,6 +245,7 @@ setMOTD () {
         echo "Error: Invalid function input. No action performed."
     fi
 }
+
 
 setWarningBanner() {
     # - https://www.tecmint.com/ssh-warning-banner-linux/
@@ -349,7 +377,7 @@ enableSSHOnly () {
         fi
         ## FIRST PROMPT USER TO LOAD THEIR SSH KEY AND VALIDATE ACCESS
         my_ip=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
-        my_public_ip=$(curl https://ipinfo.io/ip 2>> /dev/null) 
+        my_public_ip=$(curl https://icanhazip.com 2>> /dev/null) 
 
         echo ""
         echo ""
@@ -380,6 +408,40 @@ enableSSHOnly () {
     fi
 }
 
+setupChezmoi () {
+    if [ "$1" = "i" ]; then
+        # Function Info
+        echo "Install and set up Chezmoi dotfiles manager."
+    elif [ "$1" = "x" ]; then
+        # Execute Function
+        echo "... Installing Chezmoi to /usr/local/bin"
+        sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
+        echo "Initialize Chezmoi using an existing repo?"
+        promptContinue carryOn
+        if [ "$carryOn" == "Y" ]; then
+            echo "Provide the repo path to use (HTTPS or SSH)."
+            echo "Note: If the git repo is private you may need to add the SSH public key from this machine to GitHub/GitLab/etc."
+            if [ -f "/home/$newUsername/.ssh/id_ed25519.pub" ]; then
+                echo "The public key created earlier is:"
+                cat "/home/$newUsername/.ssh/id_ed25519.pub"
+            fi
+            repo=""
+            read -p "Enter the repo path (or blank to cancel): " repo
+            if ( "$repo" == "" ); then
+                echo "Not initializing"
+            else
+                chezmoi init "$repo"
+                chezmoi apply
+            fi
+        else
+            printf "Chezmoi will not be initialized. Following completion of this script, you can run \`chezmoi init\` to initialize a fresh chezmoi instance..\n"
+        fi
+    else
+        echo "Error: Invalid function input. No action performed."
+    fi
+
+}
+
 # ===== EXECUTING THE FUNCTIONS ===========================
 runStep aptUpdate "Run System Updates"
 runStep updateHostname "Update Machine Hostname"
@@ -390,6 +452,7 @@ runStep setWarningBanner "Enable Warning Message"
 runStep setupUFW "Set Up UFW"
 runStep configureFail2Ban "Configure Fail2Ban"
 runStep enableSSHOnly "Enable SSH Key-Only Login"
+runStep setupChezmoi "Set Up Chezmoi"
 
 # \\============= END SCRIPT BODY ==============//
 echo "
