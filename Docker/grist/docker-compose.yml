@@ -1,0 +1,49 @@
+############################################################
+#  GRIST
+#  ---------------------------------------------------------
+#  Grist is a modern relational spreadsheet. It combines the
+#  flexibility of a spreadsheet with the robustness of a 
+#  database to organize your data and make you more productive.
+#  https://github.com/gristlabs/grist-core
+############################################################
+version: "3"
+
+##### SERVICES #############################################
+services:
+
+  grist:
+    container_name: grist
+    # build:
+    image: gristlabs/grist
+    # command:
+    ports:
+      - 8484:8484
+    volumes:
+    - ./data:/persist
+    # depends_on:
+    # networks:
+    restart: unless-stopped # "no" always on-failure unless-stopped
+    # entrypoint:
+    # expose:
+    # secrets:
+    # env_file:
+    # environment:
+    # labels:
+    # healthcheck:
+      # test: ["CMD", "curl", "-f", "http://localhost"]
+      # interval: 1m30s
+      # timeout: 10s
+      # retries: 3
+      # start_period: 40s
+    # logging:
+      # driver: # "json-file" (<-default) "syslog" "none"
+    security_opt:
+      - no-new-privileges:true
+    # user:
+    
+
+##### NETWORKS #############################################
+# networks:
+
+##### VOLUMES ##############################################
+# volumes:
